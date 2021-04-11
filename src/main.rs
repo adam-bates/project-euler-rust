@@ -1,6 +1,7 @@
 mod problems;
 
 use problems::problem_1;
+use problems::problem_2;
 use std::env;
 
 pub type Result<Type = ()> = std::result::Result<Type, String>;
@@ -21,6 +22,7 @@ fn main() -> Result {
 
     let result = match problem {
         1 => problem_1::solve(problem_1::Options::default()),
+        2 => problem_2::solve(problem_2::Options::default()),
         _ => Err(format!("Unknown problem: {}", problem)),
     };
 
