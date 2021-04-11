@@ -33,11 +33,16 @@ pub fn solve(options: Options) -> Result<usize> {
     let mut check = max * (max - 1); // any number lower than this shouldn't be divisible by all numbers in the range
     while check <= std::usize::MAX - max {
         if ((min - 1)..(max + 1)).all(|m| check % m == 0) {
-            break;
+            return Ok(check);
         }
 
         check += iteration;
     }
 
-    Ok(check)
+    Err(format!(
+        "No number less than {} can be evenly divided by every number in range [{}, {}]",
+        std::usize::MAX,
+        options.min,
+        options.max,
+    ))
 }
