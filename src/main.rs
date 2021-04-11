@@ -4,6 +4,7 @@ use problems::problem_1;
 use problems::problem_2;
 use problems::problem_3;
 use problems::problem_4;
+use problems::problem_5;
 use std::env;
 
 pub type Result<Type = ()> = std::result::Result<Type, String>;
@@ -27,6 +28,7 @@ fn main() -> Result {
         2 => problem_2::solve(problem_2::Options::default()),
         3 => problem_3::solve(problem_3::Options::default()),
         4 => problem_4::solve(problem_4::Options::default()),
+        5 => problem_5::solve(problem_5::Options::default()),
         _ => Err(format!("Unknown problem: {}", problem)),
     };
 
