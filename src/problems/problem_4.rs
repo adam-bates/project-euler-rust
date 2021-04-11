@@ -23,13 +23,24 @@ impl Default for Options {
 pub fn solve(options: Options) -> Result<usize> {
     let mut largest_palindrome = 0;
 
+    let mut min_idx = options.min;
+
     // Loops through every unique combination of 2 numbers between [min, max] (inclusive)
     for i in ((options.min - 1)..(options.max + 1)).rev() {
+        if i < min_idx {
+            break;
+        }
+
         for j in (options.min..(i + 1)).rev() {
+            if j < min_idx {
+                break;
+            }
+
             let n = i * j;
 
             if is_palindrome(n) && n > largest_palindrome {
                 largest_palindrome = n;
+                min_idx = i.min(j);
             }
         }
     }
