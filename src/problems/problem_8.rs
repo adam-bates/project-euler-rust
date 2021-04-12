@@ -63,7 +63,7 @@ pub fn solve(options: Options) -> Result<usize> {
 fn solve_without_zeros(n: &str, digits: usize) -> usize {
     let chars: Vec<u8> = n
         .split("")
-        .filter(|&numbers| !numbers.is_empty())
+        .filter(|&c| !c.is_empty())
         .map(|c| c.parse::<u8>().unwrap())
         .collect();
 
