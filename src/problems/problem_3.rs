@@ -24,7 +24,10 @@ impl Default for Options {
 pub fn solve(options: Options) -> Result<usize> {
     let prime_factors = prime_factors(options.n);
 
-    let max_prime_factor = *prime_factors.iter().max().unwrap_or(&0);
+    let max_prime_factor = *prime_factors
+        .iter()
+        .max()
+        .ok_or_else(|| format!("Couldn't find max prime factor of: {}", options.n))?;
 
     Ok(max_prime_factor)
 }
@@ -38,6 +41,7 @@ fn is_prime(n: usize, primes_map: &mut HashMap<usize, bool>) -> bool {
         return n == 2; // 2 is the only even prime
     }
 
+    // Only search as high as odd number close to ceil(sqrt(n))
     let max = (n as f64).sqrt().trunc() as usize;
     let max = if max % 2 == 0 { max - 1 } else { max };
 
@@ -82,7 +86,7 @@ fn prime_factors(n: usize) -> Vec<usize> {
         if is_prime(prime, &mut primes_map) {
             while g % prime == 0 {
                 prime_factors.push(prime);
-                g = g / prime;
+                g /= prime;
             }
 
             if g == 1 {

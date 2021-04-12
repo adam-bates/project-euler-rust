@@ -10,28 +10,30 @@ Answer: 906609
 */
 
 pub struct Options {
-    min: usize,
-    max: usize,
+    digits: u32,
 }
 
 impl Default for Options {
     fn default() -> Self {
-        Self { min: 100, max: 999 }
+        Self { digits: 3 }
     }
 }
 
 pub fn solve(options: Options) -> Result<usize> {
+    let min = 10usize.pow(options.digits - 1);
+    let max = 10usize.pow(options.digits) - 1;
+
     let mut largest_palindrome = 0;
 
-    let mut min_idx = options.min;
+    let mut min_idx = min;
 
     // Loops through every unique combination of 2 numbers between [min, max] (inclusive)
-    for i in ((options.min - 1)..(options.max + 1)).rev() {
+    for i in ((min - 1)..(max + 1)).rev() {
         if i < min_idx {
             break;
         }
 
-        for j in (options.min..(i + 1)).rev() {
+        for j in (min..(i + 1)).rev() {
             if j < min_idx {
                 break;
             }
@@ -49,10 +51,6 @@ pub fn solve(options: Options) -> Result<usize> {
 }
 
 fn reverse_number(n: usize) -> usize {
-    if n < 10 {
-        return n;
-    }
-
     let mut g = n;
     let mut reversed = 0;
 
