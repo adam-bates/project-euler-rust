@@ -18,6 +18,12 @@ use problems::problem_12;
 use problems::problem_13;
 use problems::problem_14;
 use problems::problem_15;
+use problems::problem_16;
+use problems::problem_17;
+use problems::problem_18;
+use problems::problem_19;
+
+use problems::problem_20;
 
 use std::env;
 
@@ -54,6 +60,11 @@ fn main() -> Result {
         13 => println!("{}", problem_13::solve(problem_13::Options::default())?),
         14 => println!("{}", problem_14::solve(problem_14::Options::default())?),
         15 => println!("{}", problem_15::solve(problem_15::Options::default())?),
+        16 => println!("{}", problem_16::solve(problem_16::Options::default())?),
+        17 => println!("{}", problem_17::solve(problem_17::Options::default())?),
+        18 => println!("{}", problem_18::solve(problem_18::Options::default())?),
+        19 => println!("{}", problem_19::solve(problem_19::Options::default())?),
+        20 => println!("{}", problem_20::solve(problem_20::Options::default())?),
         _ => return Err(format!("Unknown problem: {}", problem)),
     };
 
