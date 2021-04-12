@@ -20,9 +20,12 @@ impl Default for Options {
 }
 
 pub fn solve(options: Options) -> Result<usize> {
-    let mut primes_seen = 1; // Assume we've already seen "2"
+    // Assume we've already seen "2", as we will only be looking at odd numbers below
+    let mut primes_seen = 1;
 
-    let mut n = 1; // +2 will start count at 3
+    // n += 2 in the loop will start the count at 3
+    let mut n = 1;
+
     while primes_seen < options.n {
         n += 2;
 

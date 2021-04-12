@@ -223,15 +223,21 @@ impl Default for Options {
 }
 
 pub fn solve(options: Options) -> Result<usize> {
+    // Not sure how few digits are needed,
+    // but 1.5x "options.first_digits_of_sum" should carry enough 1s to be accurate to the precision of "options.first_digits_of_sum"
     let digits_to_get = options.first_digits_of_sum + (options.first_digits_of_sum / 2);
 
     let mut sum = options
         .numbers
         .iter()
+        /*
+        Parse first "digits_to_get" of each string as a usize, and take the sum */
         .map(|n| n[0..digits_to_get].parse::<usize>().ok())
         .filter(|&n| n.is_some())
         .map(|n| n.unwrap())
         .sum();
+
+    // Then reduce result to "options.first_digits_of_sum" number of digits
 
     let max = 10usize.pow(options.first_digits_of_sum as u32);
 

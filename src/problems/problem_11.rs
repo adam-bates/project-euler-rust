@@ -110,6 +110,7 @@ impl Default for Options {
 pub fn solve(options: Options) -> Result<usize> {
     let mut max = 0;
 
+    // keep away from the edges so we can find max-adjacent in circle around each point
     for row_idx in (options.n - 1)..(options.grid.len() - options.n + 1) {
         for col_idx in (options.n - 1)..(options.grid[0].len() - options.n + 1) {
             let local_max = find_max_adjacent_numbers(&options.grid, options.n, row_idx, col_idx);
@@ -144,17 +145,19 @@ fn find_max_adjacent_numbers(
     let mut left = n;
     let mut up_left = n;
 
+    // Look at adjacent numbers in all directions around n
     for i in 1..adjacent_numbers {
-        up *= grid[row_idx - i][col_idx] as usize;
-        up_right *= grid[row_idx - i][col_idx + i] as usize;
-        right *= grid[row_idx][col_idx + i] as usize;
+        up         *= grid[row_idx - i][col_idx]     as usize;
+        up_right   *= grid[row_idx - i][col_idx + i] as usize;
+        right      *= grid[row_idx]    [col_idx + i] as usize;
         down_right *= grid[row_idx + i][col_idx + i] as usize;
-        down *= grid[row_idx + i][col_idx] as usize;
-        down_left *= grid[row_idx + i][col_idx - i] as usize;
-        left *= grid[row_idx][col_idx - i] as usize;
-        up_left *= grid[row_idx - i][col_idx - i] as usize;
+        down       *= grid[row_idx + i][col_idx]     as usize;
+        down_left  *= grid[row_idx + i][col_idx - i] as usize;
+        left       *= grid[row_idx]    [col_idx - i] as usize;
+        up_left    *= grid[row_idx - i][col_idx - i] as usize;
     }
 
+    // Will return the max of all directions
     up.max(up_right)
         .max(right)
         .max(down_right)

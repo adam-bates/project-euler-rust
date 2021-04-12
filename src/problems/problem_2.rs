@@ -32,6 +32,10 @@ pub fn solve(options: Options) -> Result<usize> {
             sum += f2;
         }
 
+        /*
+        f1 becomes f2
+        f2 becomes f1 + f2
+        */
         std::mem::swap(&mut f1, &mut f2);
         f2 += f1;
     }

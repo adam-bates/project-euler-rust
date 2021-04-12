@@ -37,6 +37,7 @@ impl Default for Options {
 pub fn solve(options: Options) -> Result<usize> {
     let mut triangle_num = 1;
 
+    // the maps are used as dynamic programming optimization for search of "prime_factors" and "is_prime"
     let mut prime_factors_map = HashMap::new();
     let mut primes_map = HashMap::new();
 
@@ -50,6 +51,17 @@ pub fn solve(options: Options) -> Result<usize> {
     Ok(triangle_num)
 }
 
+/*
+if n = p^a * q^b * r^c ...
+
+where p, q, r are the primes that factor into n
+    and a is how many primes p factor into n
+    and b is how many primes q factor into n
+    and c is how many primes r factor into n
+    ...
+
+then we can say the number_of_divisors(n) = (a + 1) * (b + 1) * (c + 1) ...
+*/
 fn num_of_divisors(
     n: usize,
     prime_factors_map: &mut HashMap<usize, Vec<usize>>,
@@ -57,15 +69,15 @@ fn num_of_divisors(
 ) -> usize {
     let prime_factors = prime_factors_cached(n, prime_factors_map, primes_map);
 
-    let mut prime_counts = HashMap::new();
+    let mut prime_factor_counts = HashMap::new();
     prime_factors.iter().for_each(|&prime| {
         // start at 1, as 1 needs to be added to the count of each prime in order to get the number of divisors
-        let count = *prime_counts.get(&prime).unwrap_or(&1);
+        let count = *prime_factor_counts.get(&prime).unwrap_or(&1);
 
-        prime_counts.insert(prime, count + 1);
+        prime_factor_counts.insert(prime, count + 1);
     });
 
-    let result = prime_counts.values().product();
+    let result = prime_factor_counts.values().product();
 
     result
 }

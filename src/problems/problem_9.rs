@@ -23,6 +23,12 @@ impl Default for Options {
 }
 
 pub fn solve(options: Options) -> Result<usize> {
+    /*
+    Given that a < b < c and a^2 + b^2 = c^2, we can say...
+        - "a" shouldn't be greater than 1/3 of the sum
+        - "b" shouldn't be greater than 1/2 of the sum
+        - "c" can be derived from: sum - a - b
+    */
     for a in 1..(options.sum / 3) {
         for b in (a + 1)..(options.sum / 2) {
             let c = options.sum - a - b;

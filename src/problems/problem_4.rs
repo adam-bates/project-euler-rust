@@ -20,11 +20,16 @@ impl Default for Options {
 }
 
 pub fn solve(options: Options) -> Result<usize> {
+    // if digits = 3, then 10^(3-1) = 10^2 = 100, which is the minimum 3-digit number
     let min = 10usize.pow(options.digits - 1);
+
+    // if digits = 3, then 10^3 - 1 = 1000 - 1 = 999, which is the maximum 3-digit number
     let max = 10usize.pow(options.digits) - 1;
 
     let mut largest_palindrome = 0;
 
+    // if we find a palindrome at some product x*y, then the minimum index we need to look at is min(x, y).
+    // anything less would give a smaller number
     let mut min_idx = min;
 
     // Loops through every unique combination of 2 numbers between [min, max] (inclusive)
@@ -50,6 +55,13 @@ pub fn solve(options: Options) -> Result<usize> {
     Ok(largest_palindrome)
 }
 
+// a number is considered a palindrome if and only if it is equal to it's reversed number
+fn is_palindrome(n: usize) -> bool {
+    n == reverse_number(n)
+}
+
+// reversing the number just inverts the position of the digits
+// ie. revers_number(1234) = 4321
 fn reverse_number(n: usize) -> usize {
     let mut g = n;
     let mut reversed = 0;
@@ -61,8 +73,4 @@ fn reverse_number(n: usize) -> usize {
     }
 
     reversed
-}
-
-fn is_palindrome(n: usize) -> bool {
-    n == reverse_number(n)
 }

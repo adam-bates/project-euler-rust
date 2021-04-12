@@ -39,7 +39,9 @@ pub fn solve(options: Options) -> Result<usize> {
 }
 
 fn square_of_sums(n: usize) -> usize {
+    // Shortcut: the sum from 1..n = n * (n+1) / 2
     let sum = (n * (n + 1)) / 2;
+    
     sum.pow(2)
 }
 

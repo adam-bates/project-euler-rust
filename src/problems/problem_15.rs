@@ -45,7 +45,6 @@ ie. (2n)! / (n!)^2
 We don't need to calculate 2n!, because we're dividing n! a couple times.
 
 Instead we can calculate 2n * (2n-1) * (2n-2) * ... * (n + 2) * (n + 1) / n!
-
 */
 pub fn solve(options: Options) -> Result<u128> {
     let moves = product_partial_factorial(options.n) / factorial(options.n);

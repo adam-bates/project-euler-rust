@@ -30,7 +30,9 @@ pub fn solve(options: Options) -> Result<usize> {
     // even numbers in the range
     let iteration = if max % 2 == 0 { max } else { max * 2 };
 
-    let mut check = max * (max - 1); // any number lower than this shouldn't be divisible by all numbers in the range
+    // any number lower than this shouldn't be divisible by all numbers in the range
+    let mut check = max * (max - 1);
+    
     while check <= std::usize::MAX - max {
         if ((min - 1)..(max + 1)).all(|m| check % m == 0) {
             return Ok(check);
