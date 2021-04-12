@@ -1,5 +1,6 @@
 mod problems;
 
+// TODO: Figure out how to avoid this from exploding using macros
 use problems::problem_1;
 use problems::problem_2;
 use problems::problem_3;
@@ -27,6 +28,7 @@ fn parse_problem_from_args(args: env::Args) -> Result<usize> {
 fn main() -> Result {
     let problem = parse_problem_from_args(env::args())?;
 
+    // TODO: Figure out how to avoid this from exploding using macros
     let result = match problem {
         1 => problem_1::solve(problem_1::Options::default()),
         2 => problem_2::solve(problem_2::Options::default()),
