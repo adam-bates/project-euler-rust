@@ -1,4 +1,4 @@
-use super::Result;
+use super::{utils::is_prime, Result};
 
 /*
 Problem 7:
@@ -32,25 +32,4 @@ pub fn solve(options: Options) -> Result<usize> {
     }
 
     Ok(n)
-}
-
-fn is_prime(n: usize) -> bool {
-    if n % 2 == 0 {
-        return n == 2; // 2 is the only even prime
-    }
-
-    // Only search as high as odd number close to ceil(sqrt(n))
-    let max = (n as f64).sqrt().trunc() as usize;
-    let max = if max % 2 == 0 { max - 1 } else { max };
-
-    let mut i = max;
-    while i >= 3 {
-        if n % i == 0 {
-            return false;
-        }
-
-        i -= 2;
-    }
-
-    true
 }
