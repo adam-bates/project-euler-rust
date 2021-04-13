@@ -5,7 +5,7 @@ pub fn is_prime(n: usize) -> bool {
         return n == 2; // 2 is the only even prime
     }
 
-    // Only search as high as odd number close to ceil(sqrt(n))
+    // Only search as high as odd number close to sqrt(n)
     let max = (n as f64).sqrt().trunc() as usize;
     let max = if max % 2 == 0 { max - 1 } else { max };
 
