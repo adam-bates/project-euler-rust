@@ -28,26 +28,13 @@ pub fn solve(options: Options) -> Result<usize> {
 
     let mut largest_palindrome = 0;
 
-    // if we find a palindrome at some product x*y, then the minimum index we need to look at is min(x, y).
-    // anything less would give a smaller number
-    let mut min_idx = min;
-
     // Loops through every unique combination of 2 numbers between [min, max] (inclusive)
     for i in ((min - 1)..(max + 1)).rev() {
-        if i < min_idx {
-            break;
-        }
-
         for j in (min..(i + 1)).rev() {
-            if j < min_idx {
-                break;
-            }
-
             let n = i * j;
 
             if is_palindrome(n) && n > largest_palindrome {
                 largest_palindrome = n;
-                min_idx = i.min(j);
             }
         }
     }
