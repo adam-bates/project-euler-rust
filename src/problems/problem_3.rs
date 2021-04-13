@@ -20,9 +20,7 @@ impl Default for Options {
 }
 
 pub fn solve(options: Options) -> Result<usize> {
-    let prime_factors = prime_factors(options.n);
-
-    prime_factors
+    prime_factors(options.n)
         .iter()
         .max()
         .map(|&max| max)
