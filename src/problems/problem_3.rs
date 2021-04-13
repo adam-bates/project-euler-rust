@@ -22,10 +22,9 @@ impl Default for Options {
 pub fn solve(options: Options) -> Result<usize> {
     let prime_factors = prime_factors(options.n);
 
-    let max_prime_factor = *prime_factors
+    prime_factors
         .iter()
         .max()
-        .ok_or_else(|| format!("Couldn't find max prime factor of: {}", options.n))?;
-
-    Ok(max_prime_factor)
+        .map(|&max| max)
+        .ok_or_else(|| format!("Couldn't find max prime factor of: {}", options.n))
 }
