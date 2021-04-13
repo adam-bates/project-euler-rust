@@ -9,13 +9,13 @@ pub fn is_prime(n: usize) -> bool {
     let max = (n as f64).sqrt().trunc() as usize;
     let max = if max % 2 == 0 { max - 1 } else { max };
 
-    let mut i = max;
-    while i >= 3 {
+    let mut i = 3;
+    while i <= max {
         if n % i == 0 {
             return false;
         }
 
-        i -= 2;
+        i += 2;
     }
 
     true
@@ -24,10 +24,6 @@ pub fn is_prime(n: usize) -> bool {
 pub fn is_prime_cached(n: usize, primes_map: &mut HashMap<usize, bool>) -> bool {
     if let Some(&is_prime) = primes_map.get(&n) {
         return is_prime;
-    }
-
-    if n % 2 == 0 {
-        return n == 2; // 2 is the only even prime
     }
 
     let is_prime = is_prime(n);
