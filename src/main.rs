@@ -1,29 +1,7 @@
 mod problems;
 mod utils;
 
-// TODO: Figure out how to avoid this from exploding using macros
-use problems::problem_1;
-use problems::problem_2;
-use problems::problem_3;
-use problems::problem_4;
-use problems::problem_5;
-use problems::problem_6;
-use problems::problem_7;
-use problems::problem_8;
-use problems::problem_9;
-
-use problems::problem_10;
-use problems::problem_11;
-use problems::problem_12;
-use problems::problem_13;
-use problems::problem_14;
-use problems::problem_15;
-use problems::problem_16;
-use problems::problem_17;
-use problems::problem_18;
-use problems::problem_19;
-
-use problems::problem_20;
+use problems::*;
 
 use std::env;
 
