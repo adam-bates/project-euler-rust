@@ -110,7 +110,7 @@ fn solve_without_zeros(str_of_digits: &str, num_of_digits: usize) -> usize {
     let mut max_product = product;
 
     // Iterate through the rest of digits, dividing out the previous, and multiplying in the next
-    // This way we're recalculating products over and over. Instead we keep a rolling product and watch for a max
+    // This way we're not recalculating the same products over and over. Instead we keep a rolling product and watch for a max
     // This lets us visit each element in "digits" only once
     for i in 1..(digits.len() - num_of_digits + 1) {
         product /= digits[i - 1] as usize;
