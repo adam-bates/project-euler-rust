@@ -1,3 +1,5 @@
+#![feature(concat_idents)]
+
 mod problems;
 mod utils;
 
@@ -21,7 +23,6 @@ fn parse_problem_from_args(args: env::Args) -> Result<usize> {
 fn main() -> Result {
     let problem = parse_problem_from_args(env::args())?;
 
-    // TODO: Figure out how to avoid this from exploding using macros
     match problem {
         1 => println!("{}", problem_1::solve(problem_1::Options::default())?),
         2 => println!("{}", problem_2::solve(problem_2::Options::default())?),
