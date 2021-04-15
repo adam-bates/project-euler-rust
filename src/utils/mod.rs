@@ -61,23 +61,35 @@ pub fn prime_factors_cached(
 
     while g % 2 == 0 {
         prime_factors.push(2);
-        g = g / 2;
+        g /= 2;
     }
 
     let mut prime = 3;
     while prime <= max {
-        if is_prime_cached(prime, primes_map) {
-            while g % prime == 0 {
+        // check divisible before expensive prime check
+        if g % prime == 0 && is_prime_cached(prime, primes_map) {
+            // do-while
+            {
                 prime_factors.push(prime);
                 g /= prime;
+
+                while g % prime == 0 {
+                    prime_factors.push(prime);
+                    g /= prime;
+                }
             }
 
             if g == 1 {
+                // Found all factors and added them to prime_factors vec
                 break;
             } else if is_prime_cached(g, primes_map) {
+                // Found all factors, still need to add self to prime_factors vec
                 prime_factors.push(g);
                 break;
             } else {
+                // Still searching for prime_factors,
+
+                // can narrow-down search though, after dividing out the found primes
                 max = (g as f64).sqrt().ceil() as usize;
             }
         }
