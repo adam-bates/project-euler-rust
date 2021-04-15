@@ -21,9 +21,7 @@ impl Default for Options {
 
 pub fn solve(options: Options) -> Result<usize> {
     // store 2^n as an array of its digits, allowing us to go above u128's max
-    // Note: would normally use u8 here but we probably want usize when we sum, and that will be at the vector's greatest size,
-    //       so not much point using u8 here and mapping later
-    let mut digits: Vec<usize> = vec![2];
+    let mut digits: Vec<u8> = vec![2];
 
     // each loop multiplies by 2
     for _ in 1..options.n {
@@ -47,7 +45,7 @@ pub fn solve(options: Options) -> Result<usize> {
         }
     }
 
-    let sum = digits.iter().sum();
+    let sum = digits.iter().map(|&n| n as usize).sum();
 
     Ok(sum)
 }
