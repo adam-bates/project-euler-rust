@@ -42,6 +42,8 @@ fn main() -> Result {
         18 => println!("{}", problem_18::solve(problem_18::Options::default())?),
         19 => println!("{}", problem_19::solve(problem_19::Options::default())?),
         20 => println!("{}", problem_20::solve(problem_20::Options::default())?),
+        21 => println!("{}", problem_21::solve(problem_21::Options::default())?),
+        22 => println!("{}", problem_22::solve(problem_22::Options::default())?),
         _ => return Err(format!("Unknown problem: {}", problem)),
     };
 
