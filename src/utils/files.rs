@@ -7,7 +7,7 @@ pub struct ReadFileOptions {
     pub padding: String,
 }
 
-pub fn read_file(filename: String, options: ReadFileOptions) -> Result<Vec<String>> {
+pub fn read_file_values(filename: String, options: ReadFileOptions) -> Result<Vec<String>> {
     let content = fs::read_to_string(filename).or_else(|e| Err(e.to_string()))?;
 
     Ok(content

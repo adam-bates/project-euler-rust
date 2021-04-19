@@ -1,5 +1,5 @@
 use super::{
-    utils::{read_file, ReadFileOptions},
+    utils::{read_file_values, ReadFileOptions},
     Result,
 };
 
@@ -27,7 +27,7 @@ impl Default for Options {
 }
 
 pub fn solve(options: Options) -> Result<usize> {
-    let mut names = read_file(
+    let mut names = read_file_values(
         options.file,
         ReadFileOptions {
             delimiter: ",".to_string(),
